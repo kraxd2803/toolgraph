@@ -51,6 +51,8 @@ if show_d:
     )
 else:
     m, n = 0.0, 0.0
+st.sidebar.write("show_d =", show_d)
+
 
 #4cal
 dinh_x, dinh_y = 0.0, 0.0
@@ -164,6 +166,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_g:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
