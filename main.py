@@ -15,7 +15,7 @@ if st.toggle("📄 Hiển thị Hướng dẫn sử dụng"):
     except Exception:
         # Dùng Exception chung để bắt mọi lỗi liên quan đến file hoặc định dạng
         st.warning(f"⚠️ KHÔNG TÌM THẤY ẢNH: Hãy đảm bảo file '{hd}' đã được upload lên GitHub cùng thư mục với main.py")
-#2inp
+#2type
 st.sidebar.header("Setting")
 loai_ham = st.sidebar.selectbox(
     "Chọn loại hàm số:",
@@ -26,6 +26,13 @@ loai_ham = st.sidebar.selectbox(
 st.sidebar.subheader("Điều chỉnh tham số")
 a = st.sidebar.slider("Hệ số a", -10.0, 10.0, 1.0, 0.1)
 b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
+
+st.sidebar.markdown("---")
+st.sidebar.subheader("Giao điểm với đường thẳng (d)")
+show_d = st.sidebar.checkbox("Bật đường thẳng (d): y = mx + n")
+if show_d:
+    m = st.sidebar.slider("Hệ số m", -10.0, 10.0, 1.0, 0.1)
+    n = st.sidebar.slider("Hệ số n", -10.0, 10.0, -2.0, 0.1)
 
 #4cal
 if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
@@ -73,6 +80,34 @@ else:
 st.latex(congthuc)
 fig = go.Figure()
 
+if show_d:
+    # Vẽ đường thẳng d
+    y_d = m * x + n
+    fig.add_trace(go.Scatter(x=x, y=y_d, mode='lines', name=f'(d): y={m}x+{n}', 
+                             line=dict(color='white', dash='dash')))
+
+    # Giải phương trình hoành độ giao điểm: ax^2 + (b-m)x + (c-n) = 0
+    # Gọi A=a, B=b-m, C=c-n
+    A_giao = a
+    B_giao = b - m
+    C_giao = c - n
+    
+    delta_giao = B_giao**2 - 4*A_giao*C_giao
+
+    if delta_giao >= 0 and A_giao != 0:
+        x1 = (-B_giao + np.sqrt(delta_giao)) / (2 * A_giao)
+        x2 = (-B_giao - np.sqrt(delta_giao)) / (2 * A_giao)
+        
+        # Lọc lấy các điểm trong khoảng hiển thị [-10, 10]
+        pts_x = list(set([x1, x2])) # set để tránh trùng khi delta=0
+        for px in pts_x:
+            if -10 <= px <= 10:
+                py = m * px + n
+                fig.add_trace(go.Scatter(x=[px], y=[py], mode='markers+text',
+                                         text=[f"({px:.1f}, {py:.1f})"],
+                                         textposition="top center",
+                                         marker=dict(color='orange', size=12, symbol='star'),
+                                         name="Giao điểm"))
 #ve ham chinh
 fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name='Đồ thị', line=dict(color='#00FFCC', width=3)))
 
@@ -117,6 +152,15 @@ with st.expander("Xem chi tiết thông số"):
         st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
         delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
         st.write(f"Biệt thức $\Delta$: {delta:.2f}")
+if show_d and "Hàm bậc hai" in loai_ham:
+    with st.expander("Phân tích giao điểm (P) và (d)"):
+        st.write(f"Xét phương trình hoành độ giao điểm: ${a}x^2 + ({b}-{m})x + ({c}-{n}) = 0$")
+        if delta_giao > 0:
+            st.success(f"$\Delta' = {delta_giao:.2f} > 0$: (d) cắt (P) tại 2 điểm phân biệt.")
+        elif delta_giao == 0:
+            st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
+        else:
+            st.error(f"$\Delta' = {delta_giao:.2f} < 0$: (d) và (P) không có điểm chung.")
 
 
 
