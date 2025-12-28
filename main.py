@@ -122,13 +122,15 @@ with st.expander("Xem chi tiết thông số"):
             else: # Parabol cơ bản thì b=0, c=0
                 delta_val = 0
                 
-            st.write(rf"Biệt thức $\Delta$: {delta_val:.2f}")
+            noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ là: **{:.2f}**".format(delta_val)
+            st.write(noidung_delta)
     
     elif loai_ham == "Hàm bậc nhất (y = ax + b)":
         if a != 0:
             st.write(f"Giao điểm với trục hoành: $x = {-b/a:.2f}$")
         else:
             st.write("Đường thẳng song song hoặc trùng với trục Ox")
+
 
 
 
