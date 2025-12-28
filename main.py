@@ -2,7 +2,6 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
 
-
 #1title
 st.set_page_config(page_title="📊TOOL VẼ ĐỒ THỊ", layout="wide")
 st.caption("made by DangKhoa🔰 - beta version")
@@ -104,17 +103,21 @@ fig.add_hline(y=0,line_dash="dash", line_color="gray", opacity=0.5)
 fig.add_vline(x=0,line_dash="dash", line_color="gray", opacity=0.5)
              
 #ui
-st.set_page_config(layout="wide") # Thiết lập chế độ màn hình rộng
-st.markdown("""
-    <style>
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 0rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+fig.update_layout(
+    xaxis_title="Trục Ox",
+    yaxis_title="Trục Oy",
+    # Đưa legend xuống dưới
+    legend=dict(
+        orientation="h", 
+        yanchor="bottom", 
+        y=-0.3, 
+        xanchor="center", 
+        x=0.5
+    ),
+    # Giảm lề trái/phải để graph rộng hơn
+    margin=dict(l=20, r=20, t=50, b=100),
+    hovermode="closest"
+)
 
 st.plotly_chart(fig, width="stretch")
 st.write(f"👉 Tại $x = {x0}$, độ dốc (đạo hàm) là **{dao_ham:.2f}**")
@@ -142,6 +145,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
