@@ -33,26 +33,12 @@ x0 = st.sidebar.slider("Chọn điểm x₀", -10.0, 10.0, 2.0, 0.1)
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Giao điểm với đường thẳng (d) đang update ")
-show_d = st.sidebar.checkbox(
-    "Bật đường thẳng (d): y = mx + n",
-    key="show_d"
-)
-
+show_d = st.sidebar.checkbox("Bật đường thẳng (d): y = mx + n")
 if show_d:
-    m = st.sidebar.slider(
-        "Hệ số m (độ dốc)",
-        -10.0, 10.0, 1.0, 0.1,
-        key="m_slider"
-    )
-    n = st.sidebar.slider(
-        "Hệ số n (tung độ gốc)",
-        -10.0, 10.0, 0.0, 0.1,
-        key="n_slider"
-    )
-else:
-    m, n = 0.0, 0.0
-st.sidebar.write("show_d =", show_d)
 
+    m = st.sidebar.slider("Hệ số m", -10.0, 10.0, 1.0, 0.1)
+
+    n = st.sidebar.slider("Hệ số n", -10.0, 10.0, -2.0, 0.1)
 
 #4cal
 dinh_x, dinh_y = 0.0, 0.0
@@ -166,6 +152,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_g:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
