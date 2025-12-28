@@ -3,7 +3,6 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
-# Tạo một ô nhập mật khẩu đơn giản
 pwd = st.sidebar.text_input("Nhập mã bí mật để dùng tool:", type="password")
 
 if pwd != "dangkhoaezz":
@@ -145,6 +144,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
