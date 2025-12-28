@@ -3,7 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 #1title
-st.set_page_config(page_title="📊TOOL VẼ ĐỒ THỊ", layout="wide")
+st.set_page_config(page_title="📊TOOL VẼ ĐỒ THỊ", layout="wide",page_icon= "⚡️")
 st.caption("made by DangKhoa🔰 - beta version")
 st.title("Công cụ vẽ đồ thị tương tác")
 
@@ -117,6 +117,7 @@ with st.expander("Xem chi tiết thông số"):
         st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
         delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
         st.write(f"Biệt thức $\Delta$: {delta:.2f}")
+
 
 
 
