@@ -169,3 +169,4 @@ if show_d and "Hàm bậc hai" in loai_ham:
 
 
 
+
