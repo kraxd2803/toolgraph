@@ -113,18 +113,25 @@ with st.expander("Xem chi tiết thông số"):
     
     # Kiểm tra nếu là một trong hai loại hàm bậc hai/parabol
     if "Hàm bậc hai" in loai_ham or "Parabol" in loai_ham:
-        delta_val = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0.0
-    
-        noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ là: **{:.2f}**".format(delta_val)
-        st.write(noidung_delta)
-    
-    # Gợi ý: Thêm màu sắc dựa trên giá trị Delta (rất trực quan cho lớp 9)
-        if delta_val > 0:
-            st.success("=> Phương trình có 2 nghiệm phân biệt.")
-        elif delta_val == 0:
-            st.warning("=> Phương trình có nghiệm kép (đồ thị tiếp xúc Ox).")
-        else:
-            st.error("=> Phương trình vô nghiệm (đồ thị không cắt Ox).")
+        if a != 0:
+            st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
+        
+            # Tính delta
+            delta_val = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0.0
+        
+            # Hiển thị Delta (Dùng r và .format để an toàn cho Python cũ)
+            noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ là: **{:.2f}**".format(delta_val)
+            st.write(noidung_delta)
+
+            # Thông báo tình trạng nghiệm dựa trên delta
+            if delta_val > 0:
+                st.success("=> Phương trình $y=0$ có 2 nghiệm phân biệt (Cắt Ox).")
+            elif delta_val == 0:
+                st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
+            else:
+                st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
+
 
 
 
