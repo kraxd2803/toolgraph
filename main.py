@@ -113,24 +113,18 @@ with st.expander("Xem chi tiết thông số"):
     
     # Kiểm tra nếu là một trong hai loại hàm bậc hai/parabol
     if "Hàm bậc hai" in loai_ham or "Parabol" in loai_ham:
-        if a != 0:
-            st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
-            
-            # Tính delta tùy theo loại hàm
-            delta_val = 0.0
-            if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)":
-                delta_val = b**2 - 4*a*c
-            else: # Parabol cơ bản thì b=0, c=0
-                delta_val = 0
-                
-            noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ là: **{:.2f}**".format(delta_val)
-            st.write(noidung_delta)
+        delta_val = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0.0
     
-    elif loai_ham == "Hàm bậc nhất (y = ax + b)":
-        if a != 0:
-            st.write(f"Giao điểm với trục hoành: $x = {-b/a:.2f}$")
+        noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ là: **{:.2f}**".format(delta_val)
+        st.write(noidung_delta)
+    
+    # Gợi ý: Thêm màu sắc dựa trên giá trị Delta (rất trực quan cho lớp 9)
+        if delta_val > 0:
+            st.success("=> Phương trình có 2 nghiệm phân biệt.")
+        elif delta_val == 0:
+            st.warning("=> Phương trình có nghiệm kép (đồ thị tiếp xúc Ox).")
         else:
-            st.write("Đường thẳng song song hoặc trùng với trục Ox")
+            st.error("=> Phương trình vô nghiệm (đồ thị không cắt Ox).")
 
 
 
