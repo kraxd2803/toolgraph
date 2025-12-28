@@ -11,10 +11,10 @@ hd = "huongdan.png"
 
 if st.toggle("📄 Hiển thị Hướng dẫn sử dụng"):
     try:
-        st.image(hd, caption="bật bảng setting ở đây",width="stretch")
-    except FileNotFoundError:
-        st.warning(f"⚠️ KHÔNG TÌM THẤY ẢNH: Vui lòng đảm bảo file ảnh '{hd}' đã được đặt cùng thư mục với main.py")
-
+        st.image(hd, caption="Bật bảng Settings ở góc trái màn hình", width="stretch")
+    except Exception:
+        # Dùng Exception chung để bắt mọi lỗi liên quan đến file hoặc định dạng
+        st.warning(f"⚠️ KHÔNG TÌM THẤY ẢNH: Hãy đảm bảo file '{hd}' đã được upload lên GitHub cùng thư mục với main.py")
 #2inp
 st.sidebar.header("Setting")
 loai_ham = st.sidebar.selectbox(
@@ -117,6 +117,7 @@ with st.expander("Xem chi tiết thông số"):
         st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
         delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
         st.write(f"Biệt thức $\Delta$: {delta:.2f}")
+
 
 
 
