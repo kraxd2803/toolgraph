@@ -21,6 +21,8 @@ b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
 
 #4cal
 c = 0.0
+dinh_x = 0.0
+dinh_y = 0.0
 
 if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     congthuc = f"y = {a}x^2"
@@ -127,6 +129,7 @@ with st.expander("Xem chi tiết thông số"):
             st.write(f"Giao điểm với trục hoành: $x = {-b/a:.2f}$")
         else:
             st.write("Đường thẳng song song hoặc trùng với trục Ox")
+
 
 
 
