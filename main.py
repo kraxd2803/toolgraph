@@ -120,7 +120,7 @@ with st.expander("Xem chi tiết thông số"):
             delta_val = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0.0
         
             # Hiển thị Delta (Dùng r và .format để an toàn cho Python cũ)
-            noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ là: **{:.2f}**".format(delta_val)
+            noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ = **{:.2f}**".format(delta_val)
             st.write(noidung_delta)
 
             # Thông báo tình trạng nghiệm dựa trên delta
@@ -130,6 +130,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
