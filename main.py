@@ -36,7 +36,6 @@ if show_d:
     n = st.sidebar.slider("Hệ số n", -10.0, 10.0, -2.0, 0.1)
 
 #4cal
-c = 0.0 
 dinh_x, dinh_y = 0.0, 0.0
 
 if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
@@ -166,6 +165,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_g:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
