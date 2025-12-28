@@ -32,7 +32,7 @@ st.sidebar.subheader("Đạo hàm & Tiếp tuyến")
 x0 = st.sidebar.slider("Chọn điểm x₀", -10.0, 10.0, 2.0, 0.1)
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("Giao điểm với đường thẳng (d)")
+st.sidebar.subheader("Giao điểm với đường thẳng (d) đang update ")
 show_d = st.sidebar.checkbox(
     "Bật đường thẳng (d): y = mx + n",
     key="show_d"
@@ -166,6 +166,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_g:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
