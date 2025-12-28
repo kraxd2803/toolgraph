@@ -7,13 +7,6 @@ st.set_page_config(page_title="📊TOOL VẼ ĐỒ THỊ", layout="wide")
 st.caption("made by DangKhoa🔰 - beta version")
 st.title("Công cụ vẽ đồ thị tương tác")
 
-hd = "huongdan.png"
-
-if st.toggle("📄 Hiển thị Hướng dẫn sử dụng"):
-    try:
-        st.image(hd, caption="bật bảng setting ở đây",width="stretch")
-    except FileNotFoundError:
-        st.warning(f"⚠️ KHÔNG TÌM THẤY ẢNH: Vui lòng đảm bảo file ảnh '{hd}' đã được đặt cùng thư mục với main.py")
 #2inp
 st.sidebar.header("Setting")
 loai_ham = st.sidebar.selectbox(
@@ -27,14 +20,6 @@ a = st.sidebar.slider("Hệ số a", -10.0, 10.0, 1.0, 0.1)
 b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
 
 #4cal
-if "Hàm bậc hai" in loai_ham:
-    c = st.sidebar.slider("Hệ số c", -10.0, 10.0, 0.0, 0.1)
-else:
-    c = 0.0 # Nếu là hàm bậc nhất hoặc parabol cơ bản thì c mặc định = 0
-    
-dinh_x = 0.0
-dinh_y = 0.0
-
 if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     congthuc = f"y = {a}x^2"
     x = np.linspace(-10, 10, 1000)
@@ -43,6 +28,7 @@ if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     dinh_x, dinh_y = 0.0, 0.0
     
 elif loai_ham == "Hàm bậc hai (y = ax² + bx + c)":
+    c=st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
     congthuc = f"y = {a}x^2 + {b}x + {c}"
     x = np.linspace(-10,10,1000)
     y = a*x**2 + b*x + c
@@ -107,72 +93,19 @@ fig.add_vline(x=0,line_dash="dash", line_color="gray", opacity=0.5)
              
 #ui
 fig.update_layout(
-    xaxis_title="Trục Ox",
-    yaxis_title="Trục Oy",
-    # Đưa legend xuống dưới
-    legend=dict(
-        orientation="h", 
-        yanchor="bottom", 
-        y=-0.3, 
-        xanchor="center", 
-        x=0.5
-    ),
-    # Giảm lề trái/phải để graph rộng hơn
-    margin=dict(l=20, r=20, t=50, b=100),
-    hovermode="closest"
+    xaxis=dict(range=[-10, 10], zeroline=True),
+    yaxis=dict(range=[-10, 10], zeroline=True),
+    height=600,
+    template="plotly_dark",
+    margin=dict(l=20, r=20, t=40, b=20)
 )
 
-st.plotly_chart(fig, width="stretch")
+st.plotly_chart(fig, use_container_width=True)
 st.write(f"👉 Tại $x = {x0}$, độ dốc (đạo hàm) là **{dao_ham:.2f}**")
 
 #6 Phân tích
 with st.expander("Xem chi tiết thông số"):
-    st.write(f"Đồ thị đang hiển thị cho: **{loai_ham}**")
-    
-    # Kiểm tra nếu là một trong hai loại hàm bậc hai/parabol
-    if "Hàm bậc hai" in loai_ham or "Parabol" in loai_ham:
-        if a != 0:
-            st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
-        
-            # Tính delta
-            delta_val = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0.0
-        
-            # Hiển thị Delta (Dùng r và .format để an toàn cho Python cũ)
-            noidung_delta = r"Biệt thức $\Delta = b^2 - 4ac$ = **{:.2f}**".format(delta_val)
-            st.write(noidung_delta)
-
-            # Thông báo tình trạng nghiệm dựa trên delta
-            if delta_val > 0:
-                st.success("=> Phương trình $y=0$ có 2 nghiệm phân biệt (Cắt Ox).")
-            elif delta_val == 0:
-                st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
-            else:
-                st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if "Hàm" in loai_ham and "bậc hai" in loai_ham and a != 0:
+        st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
+        delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
+        st.write(f"Biệt thức $\Delta$: {delta:.2f}")
