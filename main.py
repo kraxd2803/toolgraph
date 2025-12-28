@@ -104,23 +104,19 @@ fig.add_hline(y=0,line_dash="dash", line_color="gray", opacity=0.5)
 fig.add_vline(x=0,line_dash="dash", line_color="gray", opacity=0.5)
              
 #ui
-fig.update_layout(
-    height=600,
-    template="plotly_dark",
-    margin=dict(l=0, r=0, t=30, b=0)
-    legend=dict(
-        orientation="h",      
-        yanchor="top", 
-        y=-0.1, 
-        xanchor="center", 
-        x=0.5
-    ),
-    
-    # Giữ tỉ lệ khung hình ổn định
-    autosize=True
-)
+st.set_page_config(layout="wide") # Thiết lập chế độ màn hình rộng
+st.markdown("""
+    <style>
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-st.plotly_chart(fig, width="stretch",config={'responsive': True})
+st.plotly_chart(fig, width="stretch")
 st.write(f"👉 Tại $x = {x0}$, độ dốc (đạo hàm) là **{dao_ham:.2f}**")
 
 #6 Phân tích
@@ -146,6 +142,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
