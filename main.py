@@ -27,7 +27,7 @@ if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     # Tọa độ đỉnh
     dinh_x, dinh_y = 0.0, 0.0
     
-elif loai_ham == "Hàm bậc hai (y = ax² + bx + c)":
+elif loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)":
     c=st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
     congthuc = f"y = {a}x^2 + {b}x + {c}"
     x = np.linspace(-10,10,1000)
@@ -109,3 +109,4 @@ with st.expander("Xem chi tiết thông số"):
         st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
         delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
         st.write(f"Biệt thức $\Delta$: {delta:.2f}")
+
