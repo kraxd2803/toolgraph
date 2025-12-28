@@ -27,7 +27,11 @@ a = st.sidebar.slider("Hệ số a", -10.0, 10.0, 1.0, 0.1)
 b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
 
 #4cal
-c = 0.0
+if "Hàm bậc hai" in loai_ham:
+    c = st.sidebar.slider("Hệ số c", -10.0, 10.0, 0.0, 0.1)
+else:
+    c = 0.0 # Nếu là hàm bậc nhất hoặc parabol cơ bản thì c mặc định = 0
+    
 dinh_x = 0.0
 dinh_y = 0.0
 
@@ -39,7 +43,6 @@ if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     dinh_x, dinh_y = 0.0, 0.0
     
 elif loai_ham == "Hàm bậc hai (y = ax² + bx + c)":
-    c=st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
     congthuc = f"y = {a}x^2 + {b}x + {c}"
     x = np.linspace(-10,10,1000)
     y = a*x**2 + b*x + c
@@ -145,6 +148,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
