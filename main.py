@@ -28,12 +28,13 @@ a = st.sidebar.slider("Hệ số a", -10.0, 10.0, 1.0, 0.1)
 b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
 c = st.sidebar.slider("Hệ số c", -10.0, 10.0, 0.0, 0.1)
 
+st.sidebar.subheader("Đạo hàm & Tiếp tuyến")
+x0 = st.sidebar.slider("Chọn điểm x₀", -10.0, 10.0, 2.0, 0.1)
+
 st.sidebar.markdown("---")
 st.sidebar.subheader("Giao điểm với đường thẳng (d)")
 show_d = st.sidebar.checkbox("Bật đường thẳng (d): y = mx + n")
-if show_d:
-    m = st.sidebar.slider("Hệ số m", -10.0, 10.0, 1.0, 0.1)
-    n = st.sidebar.slider("Hệ số n", -10.0, 10.0, -2.0, 0.1)
+m, n = 0.0, 0.0 # Khởi tạo giá trị gốc
 
 #4cal
 dinh_x, dinh_y = 0.0, 0.0
@@ -42,27 +43,27 @@ if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     congthuc = f"y = {a}x^2"
     x = np.linspace(-10, 10, 1000)
     y = a * x**2
-    # Tọa độ đỉnh
-    dinh_x, dinh_y = 0.0, 0.0
+    dao_ham = 2 * a * x0
+    y0 = a * x0**2
     
 elif "Hàm bậc hai đầy đủ" in loai_ham:
     congthuc = f"y = {a}x^2 + {b}x + {c}"
-    x = np.linspace(-10,10,1000)
+    x = np.linspace(-10, 10, 1000)
     y = a*x**2 + b*x + c
+    dao_ham = 2 * a * x0 + b
+    y0 = a * x0**2 + b * x0 + c
     if a != 0:
         dinh_x = -b / (2 * a)
         dinh_y = a * dinh_x**2 + b * dinh_x + c
     else:
         dinh_x, dinh_y = None, None 
 
-else:
+else: # Hàm bậc nhất
     congthuc = f"y = {a}x + {b}"
-    x= np.linspace(-10,10,100)
-    y=a*x +b
-
-
-st.sidebar.subheader("Đạo hàm & Tiếp tuyến")
-x0 = st.sidebar.slider("Chọn điểm x₀", -10.0, 10.0, 2.0, 0.1)
+    x = np.linspace(-10, 10, 100)
+    y = a*x + b
+    dao_ham = a
+    y0 = a * x0 + b
 
 if loai_ham == "Hàm bậc nhất (y = ax + b)":
     dao_ham = a              # Đạo hàm của ax + b luôn là a
@@ -165,6 +166,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_g:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
