@@ -105,11 +105,19 @@ fig.add_vline(x=0,line_dash="dash", line_color="gray", opacity=0.5)
              
 #ui
 fig.update_layout(
-    xaxis=dict(range=[-10, 10], zeroline=True),
-    yaxis=dict(range=[-10, 10], zeroline=True),
     height=600,
     template="plotly_dark",
-    margin=dict(l=20, r=20, t=40, b=20)
+    margin=dict(l=10, r=10, t=50, b=10)
+    legend=dict(
+        orientation="h",      
+        yanchor="bottom", 
+        y=1.02, 
+        xanchor="right", 
+        x=1
+    ),
+    
+    # Giữ tỉ lệ khung hình ổn định
+    xaxis=dict(scaleanchor="y", scaleratio=1) 
 )
 
 st.plotly_chart(fig, width="stretch")
@@ -138,6 +146,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
