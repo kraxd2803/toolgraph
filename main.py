@@ -2,12 +2,16 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
 
-token = st.secrets["my_password"]
+if "my_password" in st.secrets:
+    token = st.secrets["my_password"]
+    pwd = st.sidebar.text_input("🔑 Nhập mã để sử dụng:", type="password")
 
-pwd = st.sidebar.text_input("Nhập mã để dùng tool:", type="password")
-
-if pwd != token:
-    st.warning("Vui lòng nhập đúng mã !")
+    if pwd != token:
+        st.title("🔒 Nội dung đang bị khóa")
+        st.info("Vui lòng nhập đúng mật khẩu ở thanh bên trái để tiếp tục.")
+        st.stop()  # Dòng này cực kỳ quan trọng, nó sẽ dừng toàn bộ code bên dưới
+else:
+    st.error("Chưa thiết lập Secrets trên Streamlit Cloud!")
     st.stop()
 
 #1title
@@ -145,6 +149,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
