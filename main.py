@@ -26,7 +26,7 @@ loai_ham = st.sidebar.selectbox(
 st.sidebar.subheader("Điều chỉnh tham số")
 a = st.sidebar.slider("Hệ số a", -10.0, 10.0, 1.0, 0.1)
 b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
-c=st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
+c = st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Giao điểm với đường thẳng (d)")
@@ -165,6 +165,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_g:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
