@@ -11,7 +11,7 @@ hd = "huongdan.png"
 
 if st.toggle("📄 Hiển thị Hướng dẫn sử dụng"):
     try:
-        st.image(hd, caption="bật bảng setting ở đây", use_column_width="auto")
+        st.image(hd, caption="bật bảng setting ở đây",width="stretch")
     except FileNotFoundError:
         st.warning(f"⚠️ KHÔNG TÌM THẤY ẢNH: Vui lòng đảm bảo file ảnh '{hd}' đã được đặt cùng thư mục với main.py")
 #2inp
@@ -137,6 +137,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
