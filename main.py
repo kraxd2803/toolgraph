@@ -117,6 +117,7 @@ with st.expander("Xem chi tiết thông số"):
             st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
             
             # Tính delta tùy theo loại hàm
+            delta_val = 0.0
             if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)":
                 delta_val = b**2 - 4*a*c
             else: # Parabol cơ bản thì b=0, c=0
@@ -130,6 +131,7 @@ with st.expander("Xem chi tiết thông số"):
             st.write(f"Giao điểm với trục hoành: $x = {-b/a:.2f}$")
         else:
             st.write("Đường thẳng song song hoặc trùng với trục Ox")
+
 
 
 
