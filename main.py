@@ -107,20 +107,20 @@ fig.add_vline(x=0,line_dash="dash", line_color="gray", opacity=0.5)
 fig.update_layout(
     height=600,
     template="plotly_dark",
-    margin=dict(l=10, r=10, t=50, b=10)
+    margin=dict(l=0, r=0, t=30, b=0)
     legend=dict(
         orientation="h",      
-        yanchor="bottom", 
-        y=1.02, 
-        xanchor="right", 
-        x=1
+        yanchor="top", 
+        y=-0.1, 
+        xanchor="center", 
+        x=0.5
     ),
     
     # Giữ tỉ lệ khung hình ổn định
-    xaxis=dict(scaleanchor="y", scaleratio=1) 
+    autosize=True
 )
 
-st.plotly_chart(fig, width="stretch")
+st.plotly_chart(fig, width="stretch",config={'responsive': True})
 st.write(f"👉 Tại $x = {x0}$, độ dốc (đạo hàm) là **{dao_ham:.2f}**")
 
 #6 Phân tích
@@ -146,6 +146,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
