@@ -105,8 +105,25 @@ st.write(f"👉 Tại $x = {x0}$, độ dốc (đạo hàm) là **{dao_ham:.2f}*
 
 #6 Phân tích
 with st.expander("Xem chi tiết thông số"):
-    if "Hàm" in loai_ham and "bậc hai" in loai_ham and a != 0:
-        st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
-        delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
-        st.write(f"Biệt thức $\Delta$: {delta:.2f}")
+    st.write(f"Đồ thị đang hiển thị cho: **{loai_ham}**")
+    
+    # Kiểm tra nếu là một trong hai loại hàm bậc hai/parabol
+    if "Hàm bậc hai" in loai_ham or "Parabol" in loai_ham:
+        if a != 0:
+            st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
+            
+            # Tính delta tùy theo loại hàm
+            if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)":
+                delta_val = b**2 - 4*a*c
+            else: # Parabol cơ bản thì b=0, c=0
+                delta_val = 0
+                
+            st.write(f"Biệt thức $\Delta$: {delta_val:.2f}")
+    
+    elif loai_ham == "Hàm bậc nhất (y = ax + b)":
+        if a != 0:
+            st.write(f"Giao điểm với trục hoành: $x = {-b/a:.2f}$")
+        else:
+            st.write("Đường thẳng song song hoặc trùng với trục Ox")
+
 
