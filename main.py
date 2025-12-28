@@ -100,7 +100,7 @@ fig.update_layout(
     margin=dict(l=20, r=20, t=40, b=20)
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 st.write(f"👉 Tại $x = {x0}$, độ dốc (đạo hàm) là **{dao_ham:.2f}**")
 
 #6 Phân tích
@@ -109,3 +109,4 @@ with st.expander("Xem chi tiết thông số"):
         st.write(f"Tọa độ đỉnh I: $({dinh_x:.2f}, {dinh_y:.2f})$")
         delta = b**2 - 4*a*c if loai_ham == "Hàm bậc hai đầy đủ (y = ax² + bx + c)" else 0
         st.write(f"Biệt thức $\Delta$: {delta:.2f}")
+
