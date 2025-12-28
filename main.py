@@ -160,12 +160,13 @@ with st.expander("Xem chi tiết thông số"):
 if show_d and "Hàm bậc hai" in loai_ham:
     with st.expander("Phân tích giao điểm (P) và (d)"):
         st.write(f"Xét phương trình hoành độ giao điểm: ${a}x^2 + ({b}-{m})x + ({c}-{n}) = 0$")
-        if delta_giao > 0:
+        if delta_g > 0:
             st.success(f"$\Delta' = {delta_giao:.2f} > 0$: (d) cắt (P) tại 2 điểm phân biệt.")
-        elif delta_giao == 0:
+        elif delta_g == 0:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_giao:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
