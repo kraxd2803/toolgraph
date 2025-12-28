@@ -26,6 +26,7 @@ loai_ham = st.sidebar.selectbox(
 st.sidebar.subheader("Điều chỉnh tham số")
 a = st.sidebar.slider("Hệ số a", -10.0, 10.0, 1.0, 0.1)
 b = st.sidebar.slider("Hệ số b", -10.0, 10.0, 0.0, 0.1)
+c=st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Giao điểm với đường thẳng (d)")
@@ -46,7 +47,6 @@ if loai_ham == "Hàm Parabol cơ bản (y = ax²)":
     dinh_x, dinh_y = 0.0, 0.0
     
 elif "Hàm bậc hai đầy đủ" in loai_ham:
-    c=st.sidebar.slider("Hệ số c", -10.0,10.0,0.0,0.1)
     congthuc = f"y = {a}x^2 + {b}x + {c}"
     x = np.linspace(-10,10,1000)
     y = a*x**2 + b*x + c
@@ -84,33 +84,35 @@ st.latex(congthuc)
 fig = go.Figure()
 
 if show_d:
-    # Vẽ đường thẳng d
+    # 1. Vẽ đường thẳng (d)
     y_d = m * x + n
     fig.add_trace(go.Scatter(x=x, y=y_d, mode='lines', name=f'(d): y={m}x+{n}', 
                              line=dict(color='white', dash='dash')))
 
-    # Giải phương trình hoành độ giao điểm: ax^2 + (b-m)x + (c-n) = 0
-    # Gọi A=a, B=b-m, C=c-n
-    A_giao = a
-    B_giao = b - m
-    C_giao = c - n
-    
-    delta_giao = B_giao**2 - 4*A_giao*C_giao
+    # 2. Giải phương trình hoành độ giao điểm
+    # ax^2 + (b-m)x + (c-n) = 0
+    A = a if "bậc hai" in loai_ham or "Parabol" in loai_ham else 0
+    B = (b - m) if "bậc hai" in loai_ham or "Parabol" in loai_ham else (a - m)
+    C = (c - n) if "bậc hai" in loai_ham or "Parabol" in loai_ham else (b - n)
 
-    if delta_giao >= 0 and A_giao != 0:
-        x1 = (-B_giao + np.sqrt(delta_giao)) / (2 * A_giao)
-        x2 = (-B_giao - np.sqrt(delta_giao)) / (2 * A_giao)
-        
-        # Lọc lấy các điểm trong khoảng hiển thị [-10, 10]
-        pts_x = list(set([x1, x2])) # set để tránh trùng khi delta=0
-        for px in pts_x:
-            if -10 <= px <= 10:
-                py = m * px + n
-                fig.add_trace(go.Scatter(x=[px], y=[py], mode='markers+text',
-                                         text=[f"({px:.1f}, {py:.1f})"],
-                                         textposition="top center",
+    if A != 0:
+        # Giải bậc 2 bằng Delta
+        delta_g = B**2 - 4*A*C
+        if delta_g >= 0:
+            x_roots = [(-B + np.sqrt(delta_g))/(2*A), (-B - np.sqrt(delta_g))/(2*A)]
+            for xr in set(x_roots):
+                yr = m * xr + n
+                fig.add_trace(go.Scatter(x=[xr], y=[yr], mode='markers',
                                          marker=dict(color='orange', size=12, symbol='star'),
                                          name="Giao điểm"))
+    elif B != 0:
+        # Giải bậc 1: Bx + C = 0 -> x = -C/B
+        xr = -C / B
+        yr = m * xr + n
+        fig.add_trace(go.Scatter(x=[xr], y=[yr], mode='markers',
+                                 marker=dict(color='orange', size=12, symbol='star'),
+                                 name="Giao điểm"))
+
 #ve ham chinh
 fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name='Đồ thị', line=dict(color='#00FFCC', width=3)))
 
@@ -164,6 +166,7 @@ if show_d and "Hàm bậc hai" in loai_ham:
             st.warning(f"$\Delta' = 0$: (d) tiếp xúc với (P).")
         else:
             st.error(f"$\Delta' = {delta_giao:.2f} < 0$: (d) và (P) không có điểm chung.")
+
 
 
 
