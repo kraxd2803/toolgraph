@@ -7,6 +7,9 @@ st.set_page_config(page_title="📊TOOL VẼ ĐỒ THỊ", layout="wide")
 st.caption("made by DangKhoa🔰 - beta version")
 st.title("Công cụ vẽ đồ thị tương tác")
 
+hd="huongdan.png"
+if st.toggle("📄 Hiển thị Hướng dẫn sử dụng"):
+    st.image(hd, caption="Hướng dẫn sử dụng ", use_column_width="auto")
 #2inp
 st.sidebar.header("Setting")
 loai_ham = st.sidebar.selectbox(
@@ -130,6 +133,7 @@ with st.expander("Xem chi tiết thông số"):
                 st.warning("=> Phương trình $y=0$ có nghiệm kép (Tiếp xúc Ox).")
             else:
                 st.error("=> Phương trình $y=0$ vô nghiệm (Không cắt Ox).")
+
 
 
 
