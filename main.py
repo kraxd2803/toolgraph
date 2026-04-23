@@ -32,7 +32,7 @@ st.sidebar.subheader("Đạo hàm & Tiếp tuyến")
 x0 = st.sidebar.slider("Chọn điểm x₀", -10.0, 10.0, 2.0, 0.1)
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("Giao điểm với đường thẳng (d) đang update ")
+st.sidebar.subheader("Giao điểm với đường thẳng (d)")
 show_d = st.sidebar.checkbox("Bật đường thẳng (d): y = mx + n")
 if show_d:
 
