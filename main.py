@@ -3,9 +3,9 @@ import numpy as np
 import plotly.graph_objects as go
 
 #1title
-st.set_page_config(page_title="📊TOOL VẼ ĐỒ THỊ", layout="wide",page_icon= "⚡️")
-st.caption("made by DangKhoa🔰 - beta version")
-st.title("Công cụ vẽ đồ thị tương tác")
+st.set_page_config(page_title="📊 VẼ ĐỒ THỊ", layout="wide",page_icon= "⚡️")
+st.caption("made by DangKhoa🔰 - NGUYỄN VĂN BỘ 2ND SCHOOL")
+st.title("Phần mềm vẽ đồ thị tương tác")
 
 hd = "huongdan.png"
 
